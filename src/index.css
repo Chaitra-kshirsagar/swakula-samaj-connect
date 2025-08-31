@@ -2,56 +2,78 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+/* Swakulasali Samaj Design System - Clean, modern community website
 All colors MUST be HSL.
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Base colors - warm, soft, community-focused */
+    --background: 42 15% 98%;
+    --foreground: 220 15% 15%;
 
+    /* Card and surface colors */
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 220 15% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 220 15% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary brand colors - saffron/orange inspired */
+    --primary: 35 85% 55%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 35 85% 65%;
+    --primary-dark: 35 85% 45%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary colors - soft cream */
+    --secondary: 42 30% 92%;
+    --secondary-foreground: 220 15% 15%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted colors for subtle elements */
+    --muted: 42 20% 94%;
+    --muted-foreground: 220 10% 50%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Accent colors - subtle gold */
+    --accent: 45 75% 85%;
+    --accent-foreground: 220 15% 15%;
 
+    /* Destructive colors */
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Border and input colors */
+    --border: 42 20% 88%;
+    --input: 42 20% 88%;
+    --ring: 35 85% 55%;
 
-    --radius: 0.5rem;
+    /* Spacing and radius */
+    --radius: 0.75rem;
 
+    /* Community section backgrounds */
+    --section-bg: 42 25% 96%;
+    --section-alternate: 35 20% 97%;
+
+    /* Text hierarchy */
+    --text-primary: 220 15% 15%;
+    --text-secondary: 220 10% 35%;
+    --text-muted: 220 8% 55%;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(35 85% 55%) 0%, hsl(45 75% 65%) 100%);
+    --gradient-section: linear-gradient(180deg, hsl(42 25% 98%) 0%, hsl(42 15% 96%) 100%);
+
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -8px hsl(35 85% 55% / 0.15);
+    --shadow-card: 0 2px 12px -4px hsl(220 15% 15% / 0.08);
+
+    /* Sidebar colors (keep existing) */
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -100,6 +122,58 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-inter;
+    font-feature-settings: "cv01", "cv02", "cv03";
+  }
+
+  /* Typography enhancements */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+
+  .section-bg {
+    background: hsl(var(--section-bg));
+  }
+
+  .section-alternate {
+    background: hsl(var(--section-alternate));
+  }
+
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+
+  .gradient-section {
+    background: var(--gradient-section);
+  }
+
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Content spacing */
+  .prose {
+    @apply max-w-none;
+  }
+
+  .prose p {
+    @apply mb-4 leading-relaxed;
+  }
+
+  .prose h2 {
+    @apply text-2xl font-bold mb-6 mt-8 text-primary;
+  }
+
+  .prose h3 {
+    @apply text-xl font-semibold mb-4 mt-6;
   }
 }
