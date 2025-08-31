@@ -1,5 +1,7 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import communityImage from "@/assets/Swakulasali Community.jpeg";
+import circularLogo from "@/assets/circular-logo.png";
 
 const Community = () => {
   return (
@@ -12,7 +14,16 @@ const Community = () => {
             <h1 className="text-4xl md:text-5xl font-bold text-primary text-center mb-8">
               Swakulasali Community
             </h1>
-            <div className="w-20 h-1 bg-primary mx-auto rounded-full mb-12"></div>
+            <div className="w-20 h-1 bg-primary mx-auto rounded-full mb-8"></div>
+            
+            {/* Community Logo */}
+            <div className="flex justify-center mb-12">
+              <img 
+                src={circularLogo} 
+                alt="Swakulasali Samaj Logo" 
+                className="h-48 w-48 md:h-56 md:w-56 rounded-full shadow-2xl border-4 border-primary/30 hover:shadow-3xl transition-all duration-300 hover:scale-105"
+              />
+            </div>
             
             <div className="prose max-w-none text-text-primary leading-relaxed space-y-6">
               <p>
@@ -27,9 +38,13 @@ const Community = () => {
                 Fostered by Jaganmata Sri Parvathi, fortunate Shri Jihveshwara being "constume designer Brahma" in Kailasa performed his day to day routine. After getting Brahmopadesha from Lord Brahma himself he completed his study of Vedas in order to attain spirituality and Mukti.
               </p>
               
-              {/* Banner image placeholder */}
-              <div className="bg-gray-200 h-48 rounded-lg my-8 flex items-center justify-center">
-                <span className="text-gray-500">Community Banner Image</span>
+              {/* Swakulasali Community Image */}
+              <div className="my-8 flex justify-center">
+                <img 
+                  src={communityImage} 
+                  alt="Swakulasali Community" 
+                  className="w-full max-w-sm h-auto rounded-lg shadow-lg object-contain"
+                />
               </div>
               
               <p>

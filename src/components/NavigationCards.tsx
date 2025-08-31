@@ -26,7 +26,7 @@ const NavigationCards = () => {
     {
       title: "Contact Us",
       path: "/contact",
-      description: "Get in touch with the community and find our location"
+      description: "Get in touch with the community"
     }
   ];
 

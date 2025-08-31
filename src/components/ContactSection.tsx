@@ -15,13 +15,57 @@ const ContactSection = () => {
   });
   const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Message Sent",
-      description: "Thank you for your message. We will get back to you soon.",
-    });
-    setFormData({ name: "", email: "", message: "" });
+    
+    // Capture form data
+    const formSubmission = {
+      name: formData.name,
+      email: formData.email,
+      message: formData.message,
+      timestamp: new Date().toLocaleString(),
+    };
+    
+    try {
+      // Send to Google Sheets via Apps Script
+      const response = await fetch('https://script.google.com/macros/s/AKfycbzh65FTX2GO52FHN6MVXxXhwIT7uFpZlYYPtH_g0YCEKyMqjQEw8Gk-l3yZBbUVNwMN0g/exec', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formSubmission)
+      });
+      
+      // Check if response is ok
+      if (response.ok) {
+        const result = await response.json();
+        console.log("Response from server:", result);
+        
+        // Show success message
+        toast({
+          title: "Message Sent Successfully!",
+          description: "Thank you for your message. We have received your inquiry and will get back to you soon.",
+        });
+        
+        // Reset form
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      // Log for debugging
+      console.log("Form submitted successfully:", formSubmission);
+      
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      
+      // Show error message
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please try again or contact us directly.",
+        variant: "destructive"
+      });
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -34,10 +78,7 @@ const ContactSection = () => {
   return (
     <section id="contact" className="py-16 section-bg">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">Get in Touch</h2>
-          <div className="w-20 h-1 bg-primary mx-auto rounded-full"></div>
-        </div>
+
 
         <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Contact Form */}
@@ -116,17 +157,28 @@ const ContactSection = () => {
 
             {/* Google Map */}
             <Card className="bg-white shadow-card border-border/50">
-              <CardContent className="p-0">
-                <iframe
-                  src="https://maps.app.goo.gl/SGkzQr3y92vNmGwF7"
-                  width="100%"
-                  height="300"
-                  style={{ border: 0, borderRadius: "0 0 8px 8px" }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Swakulasali Samaj Location"
-                ></iframe>
+              <CardHeader>
+                <CardTitle className="text-xl font-semibold">Our Location</CardTitle>
+              </CardHeader>
+              <CardContent className="p-6">
+                <div className="text-center space-y-4">
+                  <div className="bg-gray-100 rounded-lg p-8">
+                    <MapPin className="w-12 h-12 text-primary mx-auto mb-4" />
+                    <h3 className="text-lg font-semibold text-primary mb-2">Sri Sadhguru Anantha Swamy Ashrama</h3>
+                    <p className="text-text-secondary mb-4">
+                      Find us on Google Maps for directions and location details
+                    </p>
+                    <a 
+                      href="https://maps.app.goo.gl/SGkzQr3y92vNmGwF7" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary-dark transition-colors"
+                    >
+                      <MapPin className="w-4 h-4 mr-2" />
+                      Open in Google Maps
+                    </a>
+                  </div>
+                </div>
               </CardContent>
             </Card>
           </div>

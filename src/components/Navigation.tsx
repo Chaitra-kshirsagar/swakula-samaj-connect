@@ -1,4 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
+import logo from "@/assets/circular-logo.png";
 
 const Navigation = () => {
   const location = useLocation();
@@ -16,8 +17,13 @@ const Navigation = () => {
     <nav className="bg-white shadow-sm border-b border-border/50">
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-16">
-          <Link to="/" className="text-xl font-bold text-primary">
-            Swakulasali Samaj
+          <Link to="/" className="flex items-center space-x-2">
+            <img 
+              src={logo} 
+              alt="Swakulasali Samaj Logo" 
+              className="h-12 w-12 rounded-full object-cover"
+            />
+            <span className="text-xl font-bold text-primary">Swakulasali Samaj</span>
           </Link>
           
           <div className="hidden md:flex space-x-8">

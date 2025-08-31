@@ -1,5 +1,6 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const Sanghas = () => {
@@ -32,10 +33,7 @@ const Sanghas = () => {
             
             <div className="text-center mb-12">
               <p className="text-lg text-text-secondary max-w-3xl mx-auto leading-relaxed">
-                In Swakulasali community lots of Groups/Sanghas have been formed for development of the community on various parameters. Below is the list of Few Sanghas and their details.
-              </p>
-              <p className="text-sm text-text-secondary mt-4 italic">
-                (Click to get Details to be updated)
+                In Swakulasali community lots of Groups/Sanghas have been formed for development of the community on various parameters. Below is the list of Few Sanghas.
               </p>
             </div>
             
@@ -60,7 +58,14 @@ const Sanghas = () => {
             
             <div className="mt-12 text-center">
               <p className="text-text-secondary">
-                For more information about joining or connecting with these sanghas, please contact us.
+                For more information about joining or connecting with these sanghas,{" "}
+                <Link 
+                  to="/contact" 
+                  className="text-primary hover:text-primary-dark underline font-medium"
+                >
+                  please contact us
+                </Link>
+                .
               </p>
             </div>
           </div>

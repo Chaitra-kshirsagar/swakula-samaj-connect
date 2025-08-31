@@ -1,5 +1,6 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import sriJihveshwaraImage from "@/assets/sri jihveshwara.jpg";
 
 const SriJihveshwara = () => {
   return (
@@ -14,9 +15,13 @@ const SriJihveshwara = () => {
             </h1>
             <div className="w-20 h-1 bg-primary mx-auto rounded-full mb-12"></div>
             
-            {/* Image placeholder */}
-            <div className="bg-gray-200 h-64 rounded-lg mb-8 flex items-center justify-center">
-              <span className="text-gray-500">Sri Jihveshwara Image</span>
+            {/* Sri Jihveshwara Image */}
+            <div className="mb-8 flex justify-center">
+              <img 
+                src={sriJihveshwaraImage} 
+                alt="Sri Jihveshwara" 
+                className="w-full max-w-2xl h-auto rounded-lg shadow-lg object-contain"
+              />
             </div>
             
             <div className="prose max-w-none text-text-primary leading-relaxed space-y-6">

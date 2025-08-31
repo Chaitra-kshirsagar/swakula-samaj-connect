@@ -16,7 +16,7 @@ const HeroSection = () => {
       <div className="relative z-10 container mx-auto px-6 text-center">
         <Card className="max-w-4xl mx-auto bg-white/95 backdrop-blur-sm shadow-soft border-0 p-8 md:p-12">
           <h1 className="text-4xl md:text-6xl font-bold text-primary mb-4">
-            Swakulasali Community
+            Swakulasali Samaj
           </h1>
           <p className="text-xl md:text-2xl text-text-secondary font-medium">
             Bhagwan Sri Jihveshwara

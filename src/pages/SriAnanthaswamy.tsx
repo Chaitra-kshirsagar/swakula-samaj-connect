@@ -1,5 +1,6 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import sriAnanthaswamyImage from "@/assets/Sri Ananthaswamy.jpeg";
 
 const SriAnanthaswamy = () => {
   return (
@@ -14,9 +15,13 @@ const SriAnanthaswamy = () => {
             </h1>
             <div className="w-20 h-1 bg-primary mx-auto rounded-full mb-12"></div>
             
-            {/* Image placeholder */}
-            <div className="bg-gray-200 h-64 rounded-lg mb-8 flex items-center justify-center">
-              <span className="text-gray-500">Sri Ananthaswamy Image</span>
+            {/* Sri Ananthaswamy Image */}
+            <div className="mb-8 flex justify-center">
+              <img 
+                src={sriAnanthaswamyImage} 
+                alt="Sri Ananthaswamy" 
+                className="w-full max-w-sm h-auto rounded-lg shadow-lg object-contain"
+              />
             </div>
             
             <div className="prose max-w-none text-text-primary leading-relaxed space-y-6">
@@ -45,7 +50,16 @@ const SriAnanthaswamy = () => {
               </p>
               
               <h3 className="text-2xl font-semibold text-primary mt-8 mb-4">A birds eye view of the activities & development of Sri Anantha ashram:</h3>
-              <p>(sriananthaswamyashram.org) link</p>
+              <p>
+                <a 
+                  href="https://sriananthaswamyashram.org" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-primary hover:text-primary-dark underline"
+                >
+                  sriananthaswamyashram.org
+                </a>
+              </p>
               
               <p>
                 Anantha ashrama was established 85 years ago at Gandhinagar in Bangalore. SriAnantha swami of the ashram had a universal love and kind approach towards mankind .To quote an example, during the epidemics spread of plague in Bangalore people use to flee away out of distress. He brought many patients to his place and nursed them & most of the people could survive due to his care..
