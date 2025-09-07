@@ -25,21 +25,21 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 
-// https://vitejs.dev/config/
-export default defineConfig(({ mode }) => ({
-  base: "/swakula-samaj-connect/",  // 👈 add this line
-  server: {
-    host: "::",
-    port: 8080,
-  },
-  plugins: [
-    react(),
-    //mode === "development" && require("lovable-tagger").componentTagger(),
-  ].filter(Boolean),
+export default defineConfig({
+  base: "/swakula-samaj-connect/",
+  plugins: [react()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
   },
-}));
+  build: {
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, "index.html"),
+      },
+    },
+  },
+});
+
 
