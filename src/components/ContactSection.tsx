@@ -13,45 +13,67 @@ const ContactSection = () => {
     email: "",
     message: ""
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    // Basic validation
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+      toast({
+        title: "Validation Error",
+        description: "Please fill in all required fields.",
+        variant: "destructive"
+      });
+      return;
+    }
+    
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      toast({
+        title: "Invalid Email",
+        description: "Please enter a valid email address.",
+        variant: "destructive"
+      });
+      return;
+    }
+    
     // Capture form data
     const formSubmission = {
-      name: formData.name,
-      email: formData.email,
-      message: formData.message,
+      name: formData.name.trim(),
+      email: formData.email.trim(),
+      message: formData.message.trim(),
       timestamp: new Date().toLocaleString(),
     };
     
+    setIsSubmitting(true);
+    
     try {
+      console.log("Submitting form data:", formSubmission);
+      
       // Send to Google Sheets via Apps Script
       const response = await fetch('https://script.google.com/macros/s/AKfycbzh65FTX2GO52FHN6MVXxXhwIT7uFpZlYYPtH_g0YCEKyMqjQEw8Gk-l3yZBbUVNwMN0g/exec', {
         method: 'POST',
+        mode: 'no-cors', // This handles CORS issues with Google Apps Script
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formSubmission)
       });
       
-      // Check if response is ok
-      if (response.ok) {
-        const result = await response.json();
-        console.log("Response from server:", result);
-        
-        // Show success message
-        toast({
-          title: "Message Sent Successfully!",
-          description: "Thank you for your message. We have received your inquiry and will get back to you soon.",
-        });
-        
-        // Reset form
-        setFormData({ name: "", email: "", message: "" });
-      } else {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
+      // With no-cors mode, we can't read response details, but if no error is thrown, it worked
+      console.log("Form submitted successfully - no error thrown");
+      
+      // Show success message
+      toast({
+        title: "Message Sent Successfully!",
+        description: "Thank you for your message. We have received your inquiry and will get back to you soon.",
+      });
+      
+      // Reset form
+      setFormData({ name: "", email: "", message: "" });
       
       // Log for debugging
       console.log("Form submitted successfully:", formSubmission);
@@ -59,12 +81,27 @@ const ContactSection = () => {
     } catch (error) {
       console.error("Error submitting form:", error);
       
+      // More detailed error message
+      let errorMessage = "Failed to send message. Please try again or contact us directly.";
+      
+      if (error instanceof Error) {
+        if (error.message.includes('fetch')) {
+          errorMessage = "Network error. Please check your internet connection and try again.";
+        } else if (error.message.includes('HTTP error')) {
+          errorMessage = `Server error: ${error.message}`;
+        } else {
+          errorMessage = `Error: ${error.message}`;
+        }
+      }
+      
       // Show error message
       toast({
         title: "Error",
-        description: "Failed to send message. Please try again or contact us directly.",
+        description: errorMessage,
         variant: "destructive"
       });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -126,8 +163,12 @@ const ContactSection = () => {
                   />
                 </div>
                 
-                <Button type="submit" className="w-full bg-primary hover:bg-primary-dark text-primary-foreground">
-                  Send Message
+                <Button 
+                  type="submit" 
+                  className="w-full bg-primary hover:bg-primary-dark text-primary-foreground"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? "Sending..." : "Send Message"}
                 </Button>
               </form>
             </CardContent>

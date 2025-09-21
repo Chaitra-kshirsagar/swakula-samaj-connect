@@ -13,7 +13,7 @@ const Sanghas = () => {
     { name: "World Sali Foundation", location: "" },
     { name: "Sri Jihveshwara Vidyabhirudhi Trust", location: "BANGALORE" },
     { name: "Ankini Mahila Sangha", location: "BANGALORE" },
-    { name: "Baghwan Sri Jihveshwara Sports and Cultural Assosication", location: "BANGALORE" },
+    { name: "Baghwan Sri Jihveshwara Sports and Cultural Association", location: "BANGALORE" },
     { name: "Swakulasali Samaja (Weaver)", location: "HYDERABAD" },
     { name: "Swakula Chetana", location: "BANGALORE" },
     { name: "Supersalis", location: "BANGALORE" },
